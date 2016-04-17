@@ -1,4 +1,6 @@
+{% extends 'partials/base.html' %}
 {% load static %}
+{% block content %}
     <div class="container">
         <h1 id="face-detect-title">Face Detection</h1>
         <div class="col-lg-4">
@@ -86,3 +88,41 @@
             
         </div>
     </div>
+
+    <div class="container">
+    	  <script src="{% static 'js/webcam.js' %}"></script>
+    	  	<div class="row">
+    	  		<div class="col-lg-6">
+					<div id="my_camera" style="width:320px; height:240px;"></div>
+					<a href="javascript:void(take_snapshot())">Take Snapshot</a>
+    	  		</div>
+    	  		<div class="col-lg-6">
+    	  			<div class="picture-container">
+                        <center>
+                            <img id="clicked-img-1" class="picture" src="#" alt="Upload An Image" />
+                        </center>
+                        <br>
+                        <center>
+                            <a id="detect-click-1" href="#">
+                                <button class="detect-btn">Detect Faces</button>
+                            </a>
+                            <a id="reset-click-1" href="#">
+                                <button class="reset-btn">Reset</button>
+                            </a>
+                        </center>
+                    </div>
+    	  		</div>
+    	  	</div>   
+    </div>
+
+    <script type="text/javascript">
+    	Webcam.attach( '#my_camera' );
+
+        function take_snapshot() {
+            Webcam.snap( function(data_uri) {  
+                $("#clicked-img-1").attr("src",data_uri);
+            } );
+        }
+    </script>
+{% endblock %}
+
