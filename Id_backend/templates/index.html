@@ -1,0 +1,27 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div id="wrapper">
+    <div id="three-column" class="container">
+        <div class="title">
+            <h2>Image Processing </h2>
+        </div>
+        <div class="boxA">
+            <span class="fa fa-cloud-download">Face Detection</span>
+            <p>Face detection is a computer technology being used in a variety of applications that identifies human faces in digital images. Face detection also refers to the psychological process by which humans locate and attend to faces in a visual scene.</p>
+            <a href="face-detect" class="button button-alt">More Info</a>
+        </div>
+        <div class="boxB">
+            <span class="fa fa-cogs">Face Recognition</span>
+            <p>Facial recognition (or face recognition) is a type of biometric software application that can identify a specific individual in a digital image by analyzing and comparing patterns. Facial recognition systems are commonly used for security purposes but are increasingly being used in a variety of other applications.</p>
+            <a href="face-recog" class="button button-alt">More Info</a>
+        </div>
+        <div class="boxC">
+            <span class="fa fa-wrench">Feature Extraction</span>
+            <p>Feature extraction a type of dimensionality reduction that efficiently represents interesting parts of an image as a compact feature vector. This approach is useful when image sizes are large and a reduced feature representation is required to quickly complete tasks such as image matching and retrieval.</p>
+            <a href="face-extract" class="button button-alt">More Info</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
