@@ -6,7 +6,7 @@ An Image processing Project Including face Detection, face Recognition and Featu
 
 ```
 git clone https://github.com/spyshiv/I-Detector.git
-cd I-Detector/
-python server/server.py
+cd I-Detector/Id_backend
+python manage.py runserver
 ```
 Now open in your browser ```127.0.0.0.1:8000```
