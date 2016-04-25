@@ -8,9 +8,9 @@
     <link rel="icon" type="image/jpg" href="{% static 'images/favicon.jpg' %}" sizes="16x16">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <style>
-       
-    </style>
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/face_detect.js' %}"></script> 
 </head>
 <body>
     {% include 'partials/nav.html' %}
@@ -23,8 +23,6 @@
           </div>
           {% endif %}
     {% include 'partials/footer.html' %}
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/face_detect.js' %}"></script> 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

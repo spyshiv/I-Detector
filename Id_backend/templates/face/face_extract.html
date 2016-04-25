@@ -2,21 +2,112 @@
 {% load static %}
 {% block content %}
 <p>Face extract</p>
-    <script src="{% static 'js/webcam.js' %}"></script>
+<div class="container" id="feature-page">
+	<div class="row">
+		<div class="col-md-4">
+			<div id="input-f-image">
+				<img src="https://relaunch-live.s3.amazonaws.com/cms/media/images/1200x800/14726.jpg">
+			</div>
+			<button id="featured-face">See Features</button>
+		</div>		
+		<div class="col-md-8" id="attr-box">
+			<div id="js-loader"></div>
+			<h3>Attributes</h3>
+			<pre><div>
+				<div>Age: <span id="age"></span></div>
+				<div>Gender: <span id="gender_val"></span> (<span id="gender_conf"></span> %)</div>
+				<div>Specs: <span id="specs_val"></span> (<span id="specs_conf"></span> %)</div>
+				<div>Pose: Pitch Angle: <span id="pitch_angle"></span>, Roll Angle: <span id="roll_angle"></span>, Yaw Angel: <span id="yaw_angle"></span></div>
+				<div>Race: <span id="race_val"></span> (<span id="race_conf"></span> %)</div>
+				<div>Smile: <span id="smile"></span></div>
+			</div></pre>
+		</div>
+	</div>
+	
+</div>
+<style type="text/css">
+	#feature-page{
+		color: #000;
+	}
+	#input-f-image img{
+		width: 100%;
+	}
+	#attr-box{
+		position: relative;
+	}
+	#js-loader{
+		position:absolute;
+		width:100%;
+		height:100%;
+	}
+	.js-loader{
+		background-image: url("../../static/images/loading.gif");
+		background-size:100% 100%;
+		background-repeat: no-repeat;
+	    background-position: center; 
+	}
+	#featured-face{
+		cursor: pointer;
+		color: #000;
+	}
+	#features{
+		width:200px;
+		height: auto;
+		color:#000;
+	}
 
-<div id="my_camera" style="width:320px; height:240px;"></div>
-    <div id="my_result"></div>
-
-<a href="javascript:void(take_snapshot())">Take Snapshot</a>
-
+</style>
 <script type="text/javascript">
-	Webcam.attach( '#my_camera' );
+	/*Feature Extraction js*/
+		$("#featured-face").click(function(){
 
-        function take_snapshot() {
-            Webcam.snap( function(data_uri) {
-                document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';
-            } );
-        }
+			$("#js-loader").addClass("js-loader");
+
+		     var url ="https://apius.faceplusplus.com/v2/detection/detect?url=";
+		     var img = "https://relaunch-live.s3.amazonaws.com/cms/media/images/1200x800/14726.jpg";
+		     var key = "&api_secret=7e6K2C51fDgB_BGkg5lnDS7LF_MX_gKO&api_key=a1deb335e63e589716e7a2329ab5d498";
+		     var attr="&attribute=glass,pose,gender,age,race,smiling";
+		        $.post(url+img+key+attr,
+		        function(data){
+		            console.log(data);
+		         	var attributes = data.face[0].attribute;
+
+		         	//age
+		         	var age = attributes.age.value;
+		         	$("#age").html(age);
+		         	
+		         	//gender
+		         	var gender_conf = attributes.gender.confidence;
+		         	var gender_val = attributes.gender.value;
+		         	$("#gender_val").html(gender_val);
+		         	$("#gender_conf").html(gender_conf);
+		         	
+		         	//specs
+		         	var specs_conf = attributes.glass.confidence;
+		         	var specs_val = attributes.glass.value;
+		         	$("#specs_val").html(specs_val);
+		         	$("#specs_conf").html(specs_conf);
+
+		         	//pose
+		         	var pitch_angle = attributes.pose.pitch_angle.value;
+		         	var roll_angle = attributes.pose.roll_angle.value;
+		         	var yaw_angle = attributes.pose.yaw_angle.value;
+		         	$("#pitch_angle").html(pitch_angle);
+		         	$("#roll_angle").html(roll_angle);
+		         	$("#yaw_angle").html(yaw_angle);
+
+		         	//race
+		         	var race_conf = attributes.race.confidence;
+		         	var race_val = attributes.race.value;
+		         	$("#race_val").html(race_val);
+		         	$("#race_conf").html(race_conf);
+
+		         	//smile
+		         	var smile = attributes.smiling.value;
+		         	$("#smile").html(smile);
+
+					$("#js-loader").removeClass("js-loader");
+		        });
+		});
 </script>
-
 {% endblock %}
