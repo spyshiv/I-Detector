@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -13,4 +15,6 @@ urlpatterns = [
     url(r'^face-detect', views.face_detect, name='face_detect'),
     url(r'^face-recog', views.face_recog, name='face_recog'),
     url(r'^face-extract', views.face_extract, name='face_extract'),
+
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': False}),
 ]

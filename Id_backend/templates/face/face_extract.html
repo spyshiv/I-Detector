@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div id="input-f-image">
-				<img src="https://relaunch-live.s3.amazonaws.com/cms/media/images/1200x800/14726.jpg">
+				<img src="{{ images }}"/>
 			</div>
 			<button id="featured-face">See Features</button>
 		</div>		
@@ -63,7 +63,8 @@
 
 			$("#js-loader").addClass("js-loader");
 
-		     var url ="https://apius.faceplusplus.com/v2/detection/detect?url=";
+		     var url =$("#input-f-image img").attr("src");
+		     console.log(url);
 		     var img = "https://relaunch-live.s3.amazonaws.com/cms/media/images/1200x800/14726.jpg";
 		     var key = "&api_secret=7e6K2C51fDgB_BGkg5lnDS7LF_MX_gKO&api_key=a1deb335e63e589716e7a2329ab5d498";
 		     var attr="&attribute=glass,pose,gender,age,race,smiling";

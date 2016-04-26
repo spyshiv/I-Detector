@@ -1,5 +1,8 @@
 from django.conf import settings
 from django.shortcuts import render
+from facedetection.models import Imagedata
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 # Create your views here.
 
 def index(request):
@@ -26,5 +29,15 @@ def face_detect(request):
 def face_recog(request):
 	return render(request, 'face/face_recog.html')
 
+# def face_extract(request):
+# 	return render(request, 'face/face_extract.html')
+
+
 def face_extract(request):
-	return render(request, 'face/face_extract.html')
+	images = Imagedata.objects.all()
+	for image in images:
+	    Images = image.model_pic.url
+	variables = RequestContext(request,{
+	    'images':Images
+	})
+	return render_to_response('face/face_extract.html',variables)

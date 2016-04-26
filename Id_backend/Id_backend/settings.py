@@ -64,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.core.context_processors.media",
+                "django.core.context_processors.static",
             ],
         },
     },
@@ -107,3 +109,6 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
                 os.path.join(BASE_DIR, 'static'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,os.pardir,'media')
