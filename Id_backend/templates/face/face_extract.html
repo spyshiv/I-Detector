@@ -64,7 +64,7 @@
 			$("#js-loader").addClass("js-loader");
 
 		     var url ="https://apius.faceplusplus.com/v2/detection/detect?url=";
-		     var img = location.hostname+$("#input-f-image img").attr("src");
+		     var img = "http://"+location.hostname+$("#input-f-image img").attr("src");
 		     var key = "&api_secret=7e6K2C51fDgB_BGkg5lnDS7LF_MX_gKO&api_key=a1deb335e63e589716e7a2329ab5d498";
 		     var attr="&attribute=glass,pose,gender,age,race,smiling";
 		        $.post(url+img+key+attr,
