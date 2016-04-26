@@ -36,8 +36,20 @@ def face_recog(request):
 def face_extract(request):
 	images = Imagedata.objects.all()
 	for image in images:
-	    Images = image.model_pic.url
+		Name = image.name
+		Phone = image.phone_number
+		Father = image.father_name
+		Father_number = image.father_number
+		Best_friend = image.best_friend
+		Best_friend_number = image.best_friend_number
+		Images = image.model_pic.url
 	variables = RequestContext(request,{
-	    'images':Images
+	    'name' : Name,
+	    'phone' : Phone ,
+	    'father_name' : Father ,
+	    'father_number' : Father_number ,
+	    'best_friend' : Best_friend ,
+	    'best_friend_number' : Best_friend_number,
+	    'images' : Images
 	})
 	return render_to_response('face/face_extract.html',variables)
