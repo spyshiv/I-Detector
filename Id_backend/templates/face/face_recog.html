@@ -1,1 +1,21 @@
-<p>Face recog</p>
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div id="uploaded-image"></div>
+</div>
+<script type="text/javascript">
+	var folder = location.hostname+":8000/static/images/upload/";
+	console.log(folder);
+		$.ajax({
+		    url : folder,
+		    success: function (data) {
+		        $(data).find("a").attr("href", function (i, val) {
+		            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
+		                $("#uploaded-image").append( "<img src='"+ folder + val +"'>" );
+		            } 
+		        });
+		    }
+		});
+</script>
+{% endblock %}
