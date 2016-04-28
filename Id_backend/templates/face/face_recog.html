@@ -16,6 +16,7 @@
 			<p id="subject_id">{{subject_id}}</p>
 			<img id="subject_pic" src="{{subject_pic}}">
 			<button id="train-data">Train Data</button>
+			<span id="success-msg"></span>
 		</div>
 	</div>
 </div>
@@ -39,6 +40,7 @@
 
 		request.onreadystatechange = function () {
 		  if (this.readyState === 4) {
+		  	$("#success-msg").html("Image is converted to data form");
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
