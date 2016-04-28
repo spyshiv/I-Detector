@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.shortcuts import render
-from facedetection.models import Imagedata
+from facedetection.models import ImageData, imageModel
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+
+from .forms import imageModelForm
 # Create your views here.
 
 def index(request):
@@ -27,14 +29,31 @@ def face_detect(request):
 
 
 def face_recog(request):
-	return render(request, 'face/face_recog.html')
+	if request.method == "GET":
+		form = imageModelForm()
+	else:
+		form = imageModelForm(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+	latest_image = imageModel.objects.all()
+	for image in latest_image:
+		subject_name = image.subject_name
+		subject_id = image.subject_id
+		subject_pic = image.subject_pic.url
+	variables = RequestContext(request,{
+	    'subject_name' :subject_name,
+	    'subject_id' : subject_id,
+	    'subject_pic' : subject_pic
+	})
+
+	return render(request, 'face/face_recog.html', {'form':form,'success_msg':"data is saved successfully",},variables)
 
 # def face_extract(request):
 # 	return render(request, 'face/face_extract.html')
 
 
 def face_extract(request):
-	images = Imagedata.objects.all()
+	images = ImageData.objects.all()
 	for image in images:
 		Name = image.name
 		Phone = image.phone_number

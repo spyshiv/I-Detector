@@ -1,8 +1,62 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
+
 <div class="container">
-	<div id="uploaded-image"></div>
-	
+	<div class="row">
+		<div class="col-lg-6">
+			<form action="{%url 'face_recog' %}" method="post" enctype="multipart/form-data">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    <input id ="img-submit" type="submit" value="Submit" />
+			</form>
+		</div>
+		<div class="col-lg-6">
+			<p>{{subject_name}}</p>
+			<p id="subject_id">{{subject_id}}</p>
+			<img id="subject_pic" src="{{subject_pic}}">
+			<button id="train-data">Train Data</button>
+		</div>
+	</div>
 </div>
+
+<style type="text/css">
+	.container{
+		color: #000;
+	}
+</style>
+<script type="text/javascript">
+	var subject_id = $("#subject_id").html();
+	var image = "http://"+location.hostname+$("#subject_pic").attr("src");
+	console.log(image);
+	$("#train-data").click(function(){
+		var request = new XMLHttpRequest();
+		request.open('POST', 'https://api.kairos.com/enroll');
+
+		request.setRequestHeader('Content-Type', 'application/json');
+		request.setRequestHeader('app_id', 'd6139b8d');
+		request.setRequestHeader('app_key', '553c6f9fdbf6dcda55be22025a6720f6');
+
+		request.onreadystatechange = function () {
+		  if (this.readyState === 4) {
+		    console.log('Status:', this.status);
+		    console.log('Headers:', this.getAllResponseHeaders());
+		    console.log('Body:', this.responseText);
+		  }
+		};
+
+		var body = {
+		  'image': image,
+		  'subject_id': subject_id,
+		  'gallery_name': 'gallerytest1',
+		  'selector': 'SETPOSE',
+		  'symmetricFill': 'true'
+		};
+
+		request.send(JSON.stringify(body));
+	})
+
+
+</script>
+
 {% endblock %}
