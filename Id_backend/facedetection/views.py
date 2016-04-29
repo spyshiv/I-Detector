@@ -63,22 +63,24 @@ def face_recog(request):
 
 
 def face_extract(request):
-	images = ImageData.objects.all()
-	for image in images:
-		Name = image.name
+	latest_image = imageModel.objects.all()
+	for image in latest_image:
+		subject_name = image.subject_name
+		subject_id = image.subject_id
 		Phone = image.phone_number
 		Father = image.father_name
 		Father_number = image.father_number
 		Best_friend = image.best_friend
 		Best_friend_number = image.best_friend_number
-		Images = image.model_pic.url
+		subject_pic = image.subject_pic.url
 	variables = RequestContext(request,{
-	    'name' : Name,
+	    'subject_name' :subject_name,
+	    'subject_id' : subject_id,
 	    'phone' : Phone ,
 	    'father_name' : Father ,
 	    'father_number' : Father_number ,
 	    'best_friend' : Best_friend ,
 	    'best_friend_number' : Best_friend_number,
-	    'images' : Images
+	    'subject_pic' : subject_pic
 	})
 	return render_to_response('face/face_extract.html',variables)
