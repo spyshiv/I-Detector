@@ -7,7 +7,7 @@ class ImageData(models.Model):
 
 class imageModel(models.Model):
 	subject_name = models.CharField(max_length=200, blank=True)
-	subject_id = models.CharField(max_length=200, blank=True)
+	subject_id = models.CharField(max_length=200, blank=True, unique=True)
 	phone_number = models.CharField(max_length=200,  blank=True)
 	father_name = models.CharField(max_length=200,  blank=True)
 	father_number = models.CharField(max_length=200,  blank=True)
