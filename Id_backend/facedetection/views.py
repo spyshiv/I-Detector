@@ -39,10 +39,20 @@ def face_recog(request):
 	for image in latest_image:
 		subject_name = image.subject_name
 		subject_id = image.subject_id
+		Phone = image.phone_number
+		Father = image.father_name
+		Father_number = image.father_number
+		Best_friend = image.best_friend
+		Best_friend_number = image.best_friend_number
 		subject_pic = image.subject_pic.url
 	variables = RequestContext(request,{
 	    'subject_name' :subject_name,
 	    'subject_id' : subject_id,
+	    'phone' : Phone ,
+	    'father_name' : Father ,
+	    'father_number' : Father_number ,
+	    'best_friend' : Best_friend ,
+	    'best_friend_number' : Best_friend_number,
 	    'subject_pic' : subject_pic
 	})
 

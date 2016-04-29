@@ -5,28 +5,64 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6">
-			<form action="{%url 'face_recog' %}" method="post" enctype="multipart/form-data">
-			    {% csrf_token %}
-			    {{ form.as_p }}
-			    <input id ="img-submit" type="submit" value="Submit" />
-			</form>
+			<h3>Upload Image to database</h3>
+			<br>
+			<div id="imagedb-form">
+				<form action="{%url 'face_recog' %}" method="post" enctype="multipart/form-data">
+				    {% csrf_token %}
+				    {{ form.as_p }}
+				    <button id ="img-submit" type="submit" value="Submit">Submit</button>
+				</form>
+			</div>
 		</div>
 		<div class="col-lg-6">
-			<p>{{subject_name}}</p>
-			<p id="subject_id">{{subject_id}}</p>
-			<img id="subject_pic" src="{{subject_pic}}">
-			<button id="train-data">Train Data</button>
-			<span id="success-msg"></span>
+			<h3>Latest updated Image on the database</h3>
+			<br>
+			<div id="training-data">
+				<div class="row">
+					<div class="col-lg-6">
+						<p><b>Name :</b> {{subject_name}}</p>
+						<p><b>Image ID :</b> <span id="subject_id">{{subject_id}}</span></p>
+						<p><b>Phone : </b>{{phone}}</p>
+						<p><b>Father Name : </b>{{father_name}}</p>
+						<p><b>Father's Number: </b>{{father_number}}</p>
+						<p><b>Friend: </b>{{best_friend}}</p>
+						<p><b>Friend's Number</b> {{best_friend_number}}</p>
+						<button id="train-data">Train Data</button>
+						<span id="success-msg"></span>
+					</div>
+					<div class="col-lg-6">
+						<img id="subject_pic" src="{{subject_pic}}">	
+					</div>
+				</div>
+				
+			</div>
 		</div>
 	</div>
 </div>
 
 <style type="text/css">
 	.container{
+		padding:20px;
 		color: #000;
+	}
+	#imagedb-form{
+		border: 1px solid #000;
+		padding: 20px;
+	}
+	#training-data{
+		border: 1px solid #000;
+		padding:20px;
+	}
+	#subject_pic{
+		max-width:250px;
+		height: auto;
 	}
 </style>
 <script type="text/javascript">
+	$("#imagedb-form input").addClass("form-control");
+
+
 	var subject_id = $("#subject_id").html();
 	var image = "http://"+location.hostname+$("#subject_pic").attr("src");
 	console.log(image);
@@ -40,7 +76,7 @@
 
 		request.onreadystatechange = function () {
 		  if (this.readyState === 4) {
-		  	$("#success-msg").html("Image is converted to data form");
+		  	$("#success-msg").html("Image data is trained for further operation");
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
