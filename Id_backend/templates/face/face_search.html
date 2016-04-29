@@ -30,6 +30,12 @@
 				</code>
 			</div>
 		</div>
+		
+		<div class="col-lg-12">
+			<p>Image is Matched With:</p>
+			<button id="matched-with"></button>
+		</div>
+
 		<div class="col-lg-6">
 			<h3>Detaile</h3>
 			<br>
@@ -44,6 +50,7 @@
 						<p><b>Friend: </b>{{best_friend}}</p>
 						<p><b>Friend's Number</b> {{best_friend_number}}</p>
 						<button id="train-data">Train Data</button>
+						
 						<span id="success-msg"></span>
 					</div>
 					<div class="col-lg-6">
@@ -103,7 +110,9 @@
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
-		    $("#i-msg").html(this.responseText);
+		    $("#i-msg").html(this.responseText[0]);
+		    // if(this.responseText.)
+		    $("#matched-with").html(this.responseText.images[0].transaction.subject);
 		  }
 		};
 
@@ -114,7 +123,6 @@
 
 		request.send(JSON.stringify(body));
 	})
-
 
 </script>
 
