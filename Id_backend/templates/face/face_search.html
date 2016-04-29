@@ -110,10 +110,10 @@
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
-		    // $("#i-msg").html(this.responseText[0]);
+		    $("#i-msg").html(this.responseText);
 		    // if(this.responseText.)
 		    var data = this.responseText;
-		    var matched = data.images[0];
+		    var matched = data.images;
 		    $("#matched-with").html(matched);
 		  }
 		};
