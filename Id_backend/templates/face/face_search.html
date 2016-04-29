@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="col-lg-6">
-			<h3>Detaile</h3>
+			<h3>Details</h3>
 			<br>
 			<div id="training-data">
 				<div class="row">
@@ -110,17 +110,14 @@
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
-		    $("#i-msg").html(this.responseText);
-		    // if(this.responseText.)
 		    var data = this.responseText;
-		    var matched = data.images;
-		    $("#matched-with").html(matched);
+		    $("#i-msg").html(data);
 		  }
 		};
 
 		var body = {
 		  'image': image,
-		  'gallery_name': 'gallerytest1'
+		  'gallery_name': 'idataset'
 		};
 
 		request.send(JSON.stringify(body));
