@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^face-detect', views.face_detect, name='face_detect'),
     url(r'^face-recog', views.face_recog, name='face_recog'),
     url(r'^face-extract', views.face_extract, name='face_extract'),
+    url(r'^face-search', views.face_search, name='face_search'),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': False}),
 ]

@@ -4,7 +4,7 @@ from facedetection.models import ImageData, imageModel
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
-from .forms import imageModelForm
+from .forms import imageModelForm, ImageDataForm
 # Create your views here.
 
 def index(request):
@@ -84,3 +84,19 @@ def face_extract(request):
 	    'subject_pic' : subject_pic
 	})
 	return render_to_response('face/face_extract.html',variables)
+
+def face_search(request):
+	if request.method == "GET":
+		form = ImageDataForm()
+	else:
+		form = ImageDataForm(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+	uploaded_image = ImageData.objects.all()
+	for image in uploaded_image:
+		image_url = image.model_pic.url
+	variables = RequestContext(request,{
+		'image_for_search' : image_url
+		})
+	return render_to_response('face/face_search.html',{'form':form,'success_msg':"data is saved successfully",}, variables)
+
