@@ -112,7 +112,7 @@
 		    console.log('Body:', this.responseText);
 		    // $("#i-msg").html(this.responseText[0]);
 		    // if(this.responseText.)
-		    var data = this.responseText;
+		    var data =JSON.stringify(this.responseText);
 		    console.log(data);
 		    $("#matched-with").html(data.images[0].transaction.subject);
 		  }
