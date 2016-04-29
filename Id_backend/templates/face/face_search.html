@@ -14,11 +14,6 @@
 				    <button id ="img-submit" type="submit" value="Submit">Submit</button>
 				</form>
 			</div>
-			<div id="search-messages">
-				<code id="i-msg">
-					
-				</code>
-			</div>
 		</div>
 		<div class="col-lg-6">
 			<h3>Confirm Image to search</h3>
@@ -26,6 +21,13 @@
 				<img id="image-for-search" src="{{image_for_search}}">
 				<div class="clearfix"></div>
 				<button id="confirm-search">Confirm Search</button>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div id="search-messages">
+				<code id="i-msg">
+					
+				</code>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -74,6 +76,9 @@
 	#image-for-search{
 		max-width:250px;
 		height: auto;
+	}
+	#search-messages{
+		padding:20px;
 	}
 	#i-msg{
 		height:200px;
