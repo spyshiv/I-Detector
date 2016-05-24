@@ -64,6 +64,8 @@ def face_recog(request):
 
 def face_extract(request):
 	latest_image = imageModel.objects.all()
+	custom = imageModel.objects.get(subject_id="baran")
+	print "##############", custom.phone_number
 	for image in latest_image:
 		subject_name = image.subject_name
 		subject_id = image.subject_id

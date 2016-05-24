@@ -17,6 +17,7 @@
 		</div>
 		<div class="col-lg-6">
 			<h3>Confirm Image to search</h3>
+			<br>
 			<div id="image-search-panel">
 				<img id="image-for-search" src="{{image_for_search}}">
 				<div class="clearfix"></div>
@@ -28,9 +29,17 @@
 				<code id="i-msg">
 					
 				</code>
+				<div id="loading-img">
+					<img src="{% static 'images/loader.gif' %}">
+				</div>
 			</div>
 		</div>
 
+		<div class="col-lg-12">
+			<form>
+				
+			</form>
+		</div>
 		<!-- <div class="col-lg-6">
 			<h3>Details</h3>
 			<br>
@@ -80,7 +89,16 @@
 		height: auto;
 	}
 	#search-messages{
+		width: 100%;
+		min-height:200px;
+		position: relative;
 		padding:20px;
+	}
+	#loading-img{
+		display:none;
+		position: absolute;
+		width: 100%;
+		height: auto;
 	}
 	#i-msg{
 		height:200px;
@@ -92,6 +110,7 @@
 	var image = "http://"+location.hostname+$("#image-for-search").attr("src");
 	console.log(image);
 	$("#confirm-search").click(function(){
+		$("#loading-img").show();
 		var request = new XMLHttpRequest();
 
 		request.open('POST', 'https://api.kairos.com/recognize');
@@ -102,6 +121,7 @@
 
 		request.onreadystatechange = function () {
 		  if (this.readyState === 4) {
+			$("#loading-img").hide();
 		    console.log('Status:', this.status);
 		    console.log('Headers:', this.getAllResponseHeaders());
 		    console.log('Body:', this.responseText);
